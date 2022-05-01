@@ -137,7 +137,7 @@ func main() {
 		case "summary":
 			var ru ResticSummary
 			json.Unmarshal([]byte(text), &ru)
-			fmt.Print(ru)
+			writeAPI.WritePoint(ru.ToInfluxDBPoint(restic_repo))
 		default:
 			fmt.Fprintln(os.Stderr, "unknown restic message type:", rm.MessageType)
 		}
